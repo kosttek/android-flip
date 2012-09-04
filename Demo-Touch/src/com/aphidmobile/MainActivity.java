@@ -1,10 +1,14 @@
 package com.aphidmobile;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
 import com.aphidmobile.flip.FlipViewGroup;
 import com.aphidmobile.fliptouch.R;
 
@@ -17,17 +21,17 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.main);
 		setTitle(R.string.activity_title);
+		contentView = (FlipViewGroup)findViewById(R.id.flipview);
 
-		contentView = new FlipViewGroup(this);
-
-		contentView.addFlipView(View.inflate(this, R.layout.second_page, null));
+		
 		contentView.addFlipView(View.inflate(this, R.layout.first_page, null));
+		contentView.addFlipView(View.inflate(this, R.layout.second_page, null));
+		contentView.addFlipView(View.inflate(this, R.layout.third_page, null));
+		contentView.addFlipView(View.inflate(this, R.layout.fourth_page, null));
+		
 
-		setContentView(contentView);
-
-		contentView.startFlipping(); //make the first_page view flipping
 	}
 
 	@Override
@@ -58,4 +62,5 @@ public class MainActivity extends Activity {
 		super.onPause();
 		contentView.onPause();
 	}
+
 }
