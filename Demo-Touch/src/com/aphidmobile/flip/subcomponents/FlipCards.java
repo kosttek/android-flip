@@ -5,6 +5,7 @@ import static com.aphidmobile.flip.subcomponents.FlipRenderer.checkError;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -120,13 +121,15 @@ public class FlipCards {
 			rotateBy((forward ? ACCELERATION : -ACCELERATION) * animatedFrame);
 			
 			whenPageLies();
+//			reloadFirstTexture();
+
 		}
 			break;
 		default:
 			AphidLog.e("Invalid state: " + state);
 			break;
 		}
-
+		
 		synchronized (LOCK) {
 			if (startPosition == Position.down) {			
 				drawDebendsOnAngleStartDown(gl);
@@ -143,6 +146,7 @@ public class FlipCards {
 			if (nextPage && startPosition != endPosition) {
 				flipViewGroup.setCurrentViewID(tempCurrentViewId);				
 				onPageLiesDown(startPosition == Position.up ? true : false);
+				downBitmap=currentBitmap;
 			}
 		}
 	}
