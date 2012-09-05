@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.aphidmobile.flip.FlipViewGroup;
 import com.aphidmobile.fliptouch.R;
@@ -29,7 +30,13 @@ public class MainActivity extends Activity {
 		contentView.addFlipView(View.inflate(this, R.layout.first_page, null));
 		contentView.addFlipView(View.inflate(this, R.layout.second_page, null));
 		contentView.addFlipView(View.inflate(this, R.layout.third_page, null));
-		contentView.addFlipView(View.inflate(this, R.layout.fourth_page, null));
+		
+		View fourth = View.inflate(this, R.layout.fourth_page, null);
+		TextView textView1 = (TextView) fourth.findViewById(R.id.textView1);
+		textView1.setText("[4] Noam Chomsky");
+		TextView textView2 = (TextView) fourth.findViewById(R.id.textView2);
+		textView2.setText("Noam Chomsky  is an American linguist, philosopher,[6][7] cognitive scientist, logician,[8][9] historian, political critic, and activist. He is an Institute Professor and Professor (Emeritus) in the Department of Linguistics & Philosophy at MIT, where he has worked for over 50 years.[10] In addition to his work in linguistics, he has written on war, politics, and mass media, and is the author of over 100 books.");
+		contentView.addFlipView(fourth);
 		
 
 	}

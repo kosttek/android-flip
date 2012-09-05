@@ -42,19 +42,19 @@ public class FlipCards {
     private static final int STATE_AUTO_ROTATE = 2;
     private static final int STATE_NO_ACTION = 3;
     private static final Object LOCKANGLE = new Object();
-    private static final Object LOCKBITMAP = new Object();
     private int tempCurrentViewId = -1;
     private Position startPosition = Position.up;
     private Position endPosition = Position.up;
     private boolean nextPage = false;
-
+    private Position block = null;
+    
     private View newView;
     private FlipViewGroup flipViewGroup;
 
     private Bitmap previousBitmap;
     private Bitmap currentBitmap;
     private Bitmap nextBitmap;
-
+    
     private Texture frontTexture;
     private Bitmap upBitmap;
 
@@ -401,6 +401,7 @@ public class FlipCards {
 	    }
 
 	    nextPage = true;
+	    block = null;
 	} else if (!up && previousBitmap != null) {
 
 	    synchronized (LOCKANGLE) {
@@ -410,7 +411,9 @@ public class FlipCards {
 	    }
 
 	    nextPage = true;
+	    block = null;
 	} else {
+	    block = up ? Position.up : Position.down;
 	    reloadEndPointTextures();
 	    nextPage = false;
 	}
@@ -419,6 +422,10 @@ public class FlipCards {
     private float lastY = -1;
 
     public boolean handleTouchEvent(MotionEvent event) {
+	if(block !=null)
+	    if(block==startPosition)
+		return false;
+	
 	if (frontTexture == null)
 	    return false;
 
