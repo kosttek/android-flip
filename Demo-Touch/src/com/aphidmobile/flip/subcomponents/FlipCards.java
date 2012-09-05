@@ -104,12 +104,12 @@ public class FlipCards {
     }
 
     public void draw(GL10 gl) {
-
+	synchronized (LOCKANGLE) {
 	applyTexture(gl);
 
 	if (frontTexture == null)
 	    return;
-	synchronized (LOCKANGLE) {
+//	synchronized (LOCKANGLE) {
 	    switch (state) {
 	    case STATE_TOUCH:
 	    case STATE_NO_ACTION:
@@ -129,8 +129,8 @@ public class FlipCards {
 		break;
 	    }
 	    
-	}
-	synchronized (LOCKANGLE) {
+//	}
+	
 	    if (startPosition == Position.down) {
 		drawDependenceOnAngleStartDown(gl);
 	    } else if (startPosition == Position.up) {
@@ -148,7 +148,7 @@ public class FlipCards {
 		flipViewGroup.setCurrentViewID(tempCurrentViewId);
 		onPageLiesDown(startPosition == Position.up ? true : false);
 		Log.i("bitmap", angle + " bmp " + upBitmap + " " + downBitmap);
-		System.out.println("switch");
+
 	    }
 
 	}
